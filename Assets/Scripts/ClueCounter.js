@@ -1,10 +1,13 @@
-﻿#pragma strict
+#pragma strict
 
 static var numClues : int;
 var clueCounterObj : UI.Text;
 
 var notificationPanel : GameObject;
 var notificationText : UI.Text;
+
+var exitDoor : GameObject;
+
 private var notificationMsg : String;
 
 private var isSearchingActive : boolean;
@@ -27,17 +30,18 @@ function CluePickup() {
 		switch(numClues)
 		{
 			case 1:
-				notificationMsg = "Hmmm... This clue here states there might be a cave involved...";
+				notificationMsg = "This clue says there is an entrance outside to the Underworld! Let's keep looking for more info!";
 				break;
 			case 2:
 				notificationMsg = "Hmmm... This clue here states there might be a cave involved...";
 				break;
 			case 3:
-				notificationMsg = "We've got it! Let's head outside and go to the Underworld!";
+				notificationMsg = "This tells us where the cave is! We've got it! Let's head outside and go to the Underworld!";
+				exitDoor.SendMessage("setActiveOutline");
 				break;	
 				
 			default:
-				notificationMsg = "Whoops, there was an error!";
+				notificationMsg = "Hmmm, this can't be right...";
 				break;
 		}
 		

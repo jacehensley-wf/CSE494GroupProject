@@ -1,7 +1,10 @@
-﻿#pragma strict
+#pragma strict
 
 var chatPanel : GameObject;
 var chatText : UI.Text;
+
+var notificationPanel : GameObject;
+var notificationText : UI.Text;
 
 static var cerberusCollected : boolean = false;
 
@@ -20,4 +23,11 @@ function CerberusPickup() {
 function closeNotification()
 {
 	chatPanel.SetActive(false);
+}
+
+
+function InfoFound(infoText : String)
+{
+	notificationText.text = infoText;
+	notificationPanel.SetActive(true);
 }

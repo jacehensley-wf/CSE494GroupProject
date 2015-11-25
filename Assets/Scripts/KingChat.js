@@ -1,9 +1,10 @@
-﻿#pragma strict
+#pragma strict
 
 
 var chatPanel : GameObject;
 var chatText : UI.Text;
 var targetScript : ClueCounter;
+var chatButton : UI.Text;
 
 private var chatProgress : int;
 private var chatMessage : String;
@@ -40,7 +41,14 @@ function OnTriggerExit(col : Collider)
 function NextMessage()
 {
 	chatProgress++;
-	ShowMessage();
+	if(chatProgress > 2)
+	{
+		chatPanel.SetActive(false);
+	}
+	else
+	{
+		ShowMessage();
+	}
 }
 
 function ShowMessage()
@@ -48,17 +56,24 @@ function ShowMessage()
 	switch(chatProgress)
 	{
 		case 0:
-			chatMessage = "You must bring me Cerberus!";
+			chatMessage = "Hercules! For your last labor, you must go to the Underworld and bring me Cerberus, the three headed dog!";
+			chatButton.text = "Next";
 			break;
 		case 1:
-			chatMessage = "I should have a clue nearby with instructions to get into the Underworld...";
+			chatMessage = "To do this, you must enter the Underworld while you're still alive. I think I might have a clue nearby that can help you...";
 			player.SendMessage("isSearching");
 			for(var i = 0; i < clueList.length; i++)
 			{
 				clueList[i].SendMessage("setActiveOutline");
 			}
+			chatButton.text = "Next";
+			break;
+		case 2:
+			chatMessage = "Okay you should go search for the clues nearby...";
+			chatButton.text = "Close";
 			break;
 		default:
+			chatButton.text = "Close";
 			if(targetScript.numClues < 3)
 			{
 				switch(Mathf.Floor(Random.value * 4))

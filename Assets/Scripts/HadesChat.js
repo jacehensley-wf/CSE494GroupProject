@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 
 var chatPanel : GameObject;
 var chatText : UI.Text;
@@ -8,7 +8,7 @@ private var chatProgress : int;
 private var chatMessage : String;
 private var maxMessageProgress : int;
 
-private var player : GameObject;
+var player : GameObject;
 
 var clueList : GameObject[];
 
@@ -18,7 +18,10 @@ function Start () {
 }
 
 function Update () {
-
+	if(Vector3.Distance(transform.position, player.transform.position) < 25)
+	{
+		transform.LookAt(player.transform, Vector3.up);
+	}
 }
 
 function OnTriggerEnter(col : Collider)
